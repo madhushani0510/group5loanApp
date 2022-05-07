@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="assert/css/Loanmainpage.css" rel="stylesheet">
+</head>
+<body>
+<section class="form-container">
+    <form class="">
+        <h1 class="form-header">Loan App</h1>
+        <div class="form">
+            <div class="form-item form-item1">
+                <label for="firstname"> Name</label>
+                <input id="firstname" type="text" name="firstname"/>
+            </div>
+            <div class="form-item form-item1">
+                <label >Amount</label>
+                <input id="amount" for="lastname" type="number" name="lastname"/>
+            </div>
+            <div class="btn-container">
+                <input id="addPool" class="btn btn-glow form-btn" type="button" name="submit" value="Add To Participent"/>
+            </div>
+        </div>
+    </form>
+</section>
+</body>
+<script src="assert/lib/jquery-3.6.0.min.js"></script>
+<script>
+
+
+
+    $('#addPool').on('click', function(){
+        var nameLoan = $('#firstname').val();
+        var amount = $('#amount').val();
+
+        sendPoolRequest(nameLoan,amount);
+
+    });
+
+    function sendPoolRequest(nameLoan, amountLoan){
+
+        var poolDetails = {
+            "name":nameLoan,
+            "amount":amountLoan
+        }
+
+        $.ajax({
+            type: "GET",
+            url: url,
+            dataType: JSON.stringify(poolDetails),
+            success: function(response){
+                //if request if made successfully then the response represent the data
+
+                $( "#result" ).empty().append( response );
+            }
+        });
+    }
+
+</script>
+</html>
